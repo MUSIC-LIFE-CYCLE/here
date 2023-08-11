@@ -1,0 +1,107 @@
+button {
+  cursor: pointer;
+}
+
+.frame {
+  max-width: 100%;
+  min-width: 600px;
+  width: 1440px;
+  height: 100%;
+  margin: 20% auto;
+  background-color: coral;
+}
+
+.util {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
+
+.util button {
+  border: none;
+  padding: 12px;
+  color: #ffffff;
+  background: #5372f6;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px 2px rgba(83, 114, 246, 0.42);
+}
+
+.util button:hover {
+  background: #395df4;
+}
+
+.contentWrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4%;
+  width: 100%;
+  padding-bottom: 10%;
+}
+
+.content .delete button {
+  width: 100%;
+  border: none;
+  padding: 12px;
+  color: #ffffff;
+  background: red;
+  border-radius: 6px;
+}
+
+.content .delete button:hover {
+  opacity: 0.8;
+}
+
+.content .edit button {
+  width: 100%;
+  border: none;
+  padding: 12px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+}
+
+.content .edit button:hover {
+  opacity: 0.8;
+}
+
+.contentWrap .content {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #fff;
+}
+
+.contentWrap .content dt,
+.contentWrap .content dd {
+  margin: 0;
+  padding: 4px;
+  color: #000;
+  font-weight: 700;
+}
+
+.contentWrap .content .inputWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contentWrap .content .inputWrap input[type='text'] {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+.contentWrap .content .inputWrap button {
+  border: none;
+  padding: 12px;
+  color: #000;
+  background: skyblue;
+  border-radius: 6px;
+}
+
+.contentWrap .content .inputWrap button:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>edit</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      .inputWrap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .inputWrap input[type='text'] {
+        padding: 12px;
+        border-radius: 6px;
+        border: none;
+      }
+
+      .inputWrap button {
+        border: none;
+        padding: 12px;
+        color: #000;
+        background: skyblue;
+        border-radius: 6px;
+      }
+
+      .inputWrap button:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="inputWrap">
+      <input type="text" placeholder="제목" id="title" />
+      <input type="text" placeholder="설명" id="description" />
+      <input type="text" placeholder="가격" id="price" />
+      <button type="button" class="save">저장</button>
+    </div>
+  </body>
+
+  <script>
+    const titleInput = document.querySelector('#title');
+    const descriptionInput = document.querySelector('#description');
+    const priceInput = document.querySelector('#price');
+
+    let nameTitle;
+    let description;
+    let price;
+
+    let nameTitleLen = '0';
+    let descriptionLen = '0';
+    let priceLen = '0';
+
+    const productUrl = window.location.pathname.split('/');
+    const productId = productUrl[productUrl.length - 2];
+
+    const saveBtn = document.querySelector('.save');
+
+    const sum = Number(nameTitleLen + descriptionLen + priceLen);
+
+    titleInput.addEventListener('input', (e) => {
+      nameTitle = e.target.value;
+      nameTitleLen = nameTitle.length;
+    });
+    descriptionInput.addEventListener('input', (e) => {
+      description = e.target.value;
+      descriptionLen = description.length;
+    });
+    priceInput.addEventListener('input', (e) => {
+      price = e.target.value;
+      priceLen = price.length;
+    });
+    const editParam = {
+      name: nameTitle,
+      description: description,
+      price: price,
+    };
+
+    saveBtn.addEventListener('click', async () => {
+      await axios
+        .patch(`http://localhost:8080/product/${productId}`, {
+          name: nameTitle,
+          description: description,
+          price: price,
+        })
+        .then((res) => {
+          window.location.href = '/';
+          res;
+        });
+    });
+  </script>
+</html>
