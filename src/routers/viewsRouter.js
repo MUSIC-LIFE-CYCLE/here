@@ -7,7 +7,8 @@ const viewsRouter = express.Router();
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
 viewsRouter.use("/", serveStatic("home"));
-// 이 때 ${resource}.html 을 기본 파일로 설정함.
+viewsRouter.use("/register", serveStatic("register"));
+
 function serveStatic(resource) {
   const resourcePath = path.join(__dirname, `../views/${resource}`);
   const option = { index: `${resource}.html` };

@@ -6,18 +6,16 @@ const Product = model("product", productSchema);
 class productModel {
   static async create(newProduct) {
     try {
-      const createNewProduct = await Product.create(newProduct);
-      return createNewProduct;
+      return await Product.create(newProduct);
     } catch (error) {
       console.error(error);
-      return { errorMessage: "상품 등록에 실패했습니다." };
+      return { errorMessage: "제품 등록에 실패했습니다." };
     }
   }
 
   static async findByName(name) {
     try {
-      const product = await Product.findOne({ name });
-      return product;
+      return await Product.findOne({ name });
     } catch (error) {
       console.error(error);
       return null;
@@ -25,16 +23,29 @@ class productModel {
   }
 
   static async patchProduct(productId, patchData) {
-    console.log(productId, patchData);
     try {
-      const patchProduct = await Product.findByIdAndUpdate(
-        productId,
-        patchData
-      );
-      return patchProduct;
+      return await Product.findByIdAndUpdate(productId, patchData);
     } catch (error) {
       console.error(error);
-      return { errorMessage: "제품 부분 업데이트에 실패하였습니다.2" };
+      return { errorMessage: "제품 부분 업데이트에 실패하였습니다." };
+    }
+  }
+
+  static async getProducts() {
+    try {
+      return await Product.find({});
+    } catch (error) {
+      console.error(error);
+      return { errorMessage: "제품 조회에 실패하였습니다." };
+    }
+  }
+
+  static async deleteProduct(productId) {
+    try {
+      return await Product.deleteOne({ _id: productId });
+    } catch (error) {
+      console.error(error);
+      return { errorMessage: "제품 삭제에 실패하였습니다." };
     }
   }
 }
