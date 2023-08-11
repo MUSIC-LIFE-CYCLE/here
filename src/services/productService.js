@@ -45,13 +45,11 @@ class productService {
 
   // 상품 목록 조회 메서드
   static async getProducts() {
-    try {
-      const product = await productModel.getProducts({});
-      return product;
-    } catch (error) {
-      // 오류 발생 시 실패 메시지 반환
-      return { errorMessage: "제품 조회에 실패하였습니다." };
+    const product = await productModel.getProducts({});
+    if (product[0] === undefined) {
+      return { errorMessage: "등록된 제품이 없습니다." };
     }
+    return product;
   }
 
   // 상품 삭제 메서드
