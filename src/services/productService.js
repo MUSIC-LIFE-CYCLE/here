@@ -3,54 +3,49 @@ import { v4 as uuidv4 } from "uuid";
 
 class productService {
   static async addProduct({ name, price, description }) {
+    // 여기에 코드 작성
     try {
-      const existingProduct = await productModel.findByName(name);
-      if (existingProduct) {
+      const checkProduct = await productModel.findByName(name);
+      if (checkProduct) {
         return { errorMessage: "이미 등록된 상품입니다." };
       }
-
-      const newProduct = await productModel.create({
+      const createNewProduct = await productModel.create({
         id: uuidv4(),
-        name,
-        price,
-        description,
+        name: name,
+        price: price,
+        description: description,
       });
+      createNewProduct.errorMessage = null;
 
-      newProduct.errorMessage = null;
-      return newProduct;
+      return createNewProduct;
     } catch (error) {
       return { errorMessage: "상품 등록에 실패하였습니다." };
     }
   }
-
   static async patchProduct(productId, patchData) {
     try {
-      const patchedProduct = await productModel.patchProduct(
+      const patchProduct = await productModel.patchProduct(
         productId,
         patchData
       );
-      return patchedProduct;
+      return patchProduct;
     } catch (error) {
-      console.error(error);
       return { errorMessage: "제품 부분 업데이트에 실패하였습니다." };
     }
   }
-
   static async getProducts() {
     try {
-      const products = await productModel.getProducts({});
-      return products;
+      const product = await productModel.getProducts({});
+      return product;
     } catch (error) {
       return { errorMessage: "제품 조회에 실패하였습니다." };
     }
   }
-
   static async deleteProduct(productId) {
     try {
-      const deletedProduct = await productModel.deleteProduct(productId);
-      return deletedProduct;
+      const product = await productModel.deleteProduct(productId);
+      return product;
     } catch (error) {
-      console.error(error);
       return { errorMessage: "제품 삭제에 실패하였습니다." };
     }
   }
